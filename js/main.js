@@ -15,7 +15,6 @@ function initNavigation() {
   });
 
   function navAnimation(direction) {
-    console.log("direction", direction);
     const scrollingDonw = direction === 1;
     const links = scrollingDonw ? mainNavLink : mainNavLinkRev;
     return gsap.to(links, {
@@ -35,13 +34,23 @@ function initNavigation() {
       className: "has-scrolled",
     },
     onEnter: ({ direction }) => navAnimation(direction),
-    onLeaveBack: ({ direction }) => navAnimation(direction),
-    markers: true,
+    onLeaveBack: ({ direction }) => navAnimation(direction)
   });
+}
+
+function initHeaderTilt(){
+  document.querySelector("header").addEventListener("mousemove", moveImages);
+}
+
+function moveImages(event){
+  const {offsetX, offsetY, target} = event;
+  const {clientWidth, clientHeight } = target;
+  console.log(offsetX, offsetY, clientWidth, clientHeight)
 }
 
 function init() {
   initNavigation();
+  initHeaderTilt();
 }
 
 window.addEventListener("load", function () {
