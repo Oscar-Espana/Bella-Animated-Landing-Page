@@ -1,5 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// Start Navigation Header
 function initNavigation() {
   const mainNavLink = gsap.utils.toArray(".main-nav a");
   const mainNavLinkRev = gsap.utils.toArray(".main-nav a").reverse();
@@ -86,10 +87,35 @@ function moveImages(event) {
     ease: "power4.out",
   });
 }
+// Finish Navigation Header
+
+// Start Reveal Gallery
+function initHoverReveal() {
+  const sections = document.querySelectorAll(".rg__column");
+  sections.forEach((section) => {
+    //get components for animation
+    const imageBlock = section.querySelector(".rg__image");
+    const mask = section.querySelector(".rg__image--mask ");
+
+    //reset the initial position
+    gsap.set(imageBlock, { yPercent: -101 });
+    gsap.set(mask, { yPercent: 100 });
+
+    //add eevent listeners to each section
+    section.addEventListener("mouseenter", createHoverReveal);
+    section.addEventListener("mouseleave", createHoverReveal);
+  });
+}
+
+function createHoverReveal(event) {
+  console.log(event.type);
+}
+// Finish  Reveal Gallery
 
 function init() {
   initNavigation();
   initHeaderTilt();
+  initHoverReveal();
 }
 
 window.addEventListener("load", function () {
