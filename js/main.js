@@ -7,6 +7,7 @@ window.addEventListener("load", function () {
 function init() {
   initNavigation();
   initHeaderTilt();
+  initPortfolioHover();
 }
 
 // Start Navigation Header
@@ -200,3 +201,46 @@ function handleWidthChange(mq) {
 }
 
 // Finish  Reveal Gallery
+
+// Start Portfolio
+
+// create hover effect for each portfolio navigation item
+const allLinks = gsap.utils.toArray(".portfolio__categories a");
+const pageBackground = document.querySelector(".fill-background");
+const largeImage = document.querySelector(".portfolio__image--l");
+const smallImage = document.querySelector(".portfolio__image--s");
+const lInside = document.querySelector(".portfolio__image--l .image_inside");
+const sInside = document.querySelector(".portfolio__image--s .image_inside");
+
+function initPortfolioHover() {
+  allLinks.forEach((link) => {
+    link.addEventListener("mouseenter", createPortfolioHover);
+    link.addEventListener("mouseleave", createPortfolioHover);
+  });
+}
+
+function createPortfolioHover(e) {
+  if (e.type === "mouseenter") {
+    // change images to the right urls
+    // fade in images
+    // all siblings to white and fade out
+    // active link to white
+    // update page background color
+
+    const { color, imagelarge, imagesmall } = e.target.dataset;
+    const allSiblings = allLinks.filter((item) => item !== e.target);
+    const tl = gsap.timeline();
+    tl.set(lInside, { backgroundImage: `url(${imagelarge})` })
+      .set(sInside, { backgroundImage: `url(${imagesmall})` })
+      .to([largeImage, smallImage], { duration: 1, autoAlpha: 1 })
+      .to(allSiblings, { color: "#fff", autoAlpha: 0.2 }, 0)
+      .to(e.target, { color: "#fff", autoAlpha: 1 }, 0)
+      .to(pageBackground, { background: color, ease: "none" }, 0);
+  } else if (e.type === "mouseleave") {
+    // fade out images
+    // all links back to black
+    // change background color back to default #ACB7AE
+  }
+}
+
+// Finish Portfolio
