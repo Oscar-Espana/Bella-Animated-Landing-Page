@@ -216,6 +216,7 @@ function initPortfolioHover() {
   allLinks.forEach((link) => {
     link.addEventListener("mouseenter", createPortfolioHover);
     link.addEventListener("mouseleave", createPortfolioHover);
+    link.addEventListener("mousemove", createPortfolioMove);
   });
 }
 
@@ -244,8 +245,30 @@ function createPortfolioHover(e) {
     tl.to([largeImage, smallImage], { autoAlpha: 0 })
       .to(allLinks, { color: "#000000", autoAlpha: 1 }, 0)
       .to(pageBackground, { background: "#acb7ae", ease: "none" }, 0);
-
   }
 }
 
+function createPortfolioMove(e) {
+  const { clientY } = e;
+
+  //move large image
+  gsap.to(largeImage, {
+    duration: 1.2,
+    y: getPortfolioOffset(clientY) / 6,
+    ease: "Power3.out",
+  });
+
+  //move small image
+  gsap.to(smallImage, {
+    duration: 1.5,
+    y: -getPortfolioOffset(clientY) / 3,
+    ease: "Power3.inOut",
+  });
+}
+
+function getPortfolioOffset(clientY) {
+  return -(
+    document.querySelector(".portfolio__categories").clientHeight - clientY
+  );
+}
 // Finish Portfolio
