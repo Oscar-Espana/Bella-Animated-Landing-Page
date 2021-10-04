@@ -89,9 +89,29 @@ function moveImages(event) {
 }
 // Finish Navigation Header
 
+// function init() {
+//   initNavigation();
+//   initHeaderTilt();
+// }
+
+// window.addEventListener("load", function () {
+//   init();
+// });
+
 // Start Reveal Gallery
+
+const sections = document.querySelectorAll(".rg__column");
+
+//define a breakpoint
+const mq = window.matchMedia("(min-width: 768px)");
+
+// add change listener to tjis breakpoint
+mq.addEventListener("change", handleWidthChange);
+
+//first page load
+handleWidthChange(mq);
+
 function initHoverReveal() {
-  const sections = document.querySelectorAll(".rg__column");
   sections.forEach((section) => {
     //get components for animation
     section.imageBlock = section.querySelector(".rg__image");
@@ -112,6 +132,7 @@ function initHoverReveal() {
     section.addEventListener("mouseleave", createHoverReveal);
   });
 }
+
 function getTextHeight(textCopy) {
   return textCopy.clientHeight;
 }
@@ -144,25 +165,18 @@ function createHoverReveal(event) {
   }
   return tl;
 }
-// Finish  Reveal Gallery
 
-// function init() {
-//   initNavigation();
-//   initHeaderTilt();
-//   initHoverReveal();
-// }
+function resetProps(elements) {
 
-// window.addEventListener("load", function () {
-//   init();
-// });
+  //stop all tweents
+  gsap.killTweensOf("*")
 
-//define a breakpoint
-const mq = window.matchMedia("(min-width: 768px)");
-// add change listener to tjis breakpoint
-mq.addEventListener("change", handleWidthChange);
-
-//first page load
-handleWidthChange(mq);
+  if (elements.length) {
+    elements.forEach((element) => {
+      element && gsap.set(element, { clearProps: "all" });
+    });
+  }
+}
 
 function handleWidthChange(mq) {
   //check if we are on the right breakpoint
@@ -172,5 +186,19 @@ function handleWidthChange(mq) {
   } else {
     //width is less than 768px
     console.log("we are on mobile");
+
+    //remove event listener for each section
+    sections.forEach((section) => {
+      section.removeEventListener("mouseenter", createHoverReveal);
+      section.removeEventListener("mouseleave", createHoverReveal);
+
+      const { imageBlock, mask, text, textCopy, textMask, textP, image } =
+        section;
+
+      // reset all applied styles
+      resetProps([imageBlock, mask, text, textCopy, textMask, textP, image]);
+    });
   }
 }
+
+// Finish  Reveal Gallery
