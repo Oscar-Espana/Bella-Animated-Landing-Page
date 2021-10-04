@@ -9,6 +9,7 @@ function init() {
   initHeaderTilt();
   initPortfolioHover();
   initImageParallax();
+  initPinSteps();
 }
 
 // Start Navigation Header
@@ -293,7 +294,6 @@ function  initImageParallax() {
           trigger:section,
           start: "top bottom",
           scrub: true,
-          markers: true
         }
       })
     }
@@ -302,3 +302,17 @@ function  initImageParallax() {
 }
 
 // Finish Parallax Images
+
+// Start Pin Navigation
+
+function  initPinSteps() {
+  ScrollTrigger.create({
+    trigger: ".fixed-nav",
+    start:"top center",
+    endTrigger: "#stage4",
+    end: "center center",
+    pin: true,
+  })
+}
+
+// Finish Pin Navigation
