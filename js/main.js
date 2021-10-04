@@ -96,6 +96,8 @@ function initHoverReveal() {
     //get components for animation
     section.imageBlock = section.querySelector(".rg__image");
     section.mask = section.querySelector(".rg__image--mask ");
+    section.text = section.querySelector(".rg__text");
+    section.textCopy = section.querySelector(".rg__text--copy");
 
     //reset the initial position
     gsap.set(section.imageBlock, { yPercent: -101 });
@@ -106,9 +108,12 @@ function initHoverReveal() {
     section.addEventListener("mouseleave", createHoverReveal);
   });
 }
+function getTextHeight(textCopy) {
+  return textCopy.clientHeight;
+}
 
 function createHoverReveal(event) {
-  const { imageBlock, mask } = event.target;
+  const { imageBlock, mask, text, textCopy } = event.target;
   const tl = gsap.timeline({
     defaults: {
       duration: 0.7,
@@ -117,9 +122,13 @@ function createHoverReveal(event) {
   });
 
   if (event.type === "mouseenter") {
-    tl.to([mask, imageBlock], { yPercent: 0 });
+    tl
+      // .to([mask, imageBlock], { yPercent: 0 })
+      .to(text, { y: () => -getTextHeight(textCopy) / 2 });
   } else if (event.type === "mouseleave") {
-    tl.to(mask, { yPercent: 100 }).to(imageBlock, { yPercent: -101 }, 0);
+    tl
+      // .to(mask, { yPercent: 100 }).to(imageBlock, { yPercent: -101 }, 0)
+      .to(text, { y: 0 });
   }
   return tl;
 }
