@@ -94,21 +94,34 @@ function initHoverReveal() {
   const sections = document.querySelectorAll(".rg__column");
   sections.forEach((section) => {
     //get components for animation
-    const imageBlock = section.querySelector(".rg__image");
-    const mask = section.querySelector(".rg__image--mask ");
+    section.imageBlock = section.querySelector(".rg__image");
+    section.mask = section.querySelector(".rg__image--mask ");
 
     //reset the initial position
-    gsap.set(imageBlock, { yPercent: -101 });
-    gsap.set(mask, { yPercent: 100 });
+    gsap.set(section.imageBlock, { yPercent: -101 });
+    gsap.set(section.mask, { yPercent: 100 });
 
-    //add eevent listeners to each section
+    //add event listeners to each section
     section.addEventListener("mouseenter", createHoverReveal);
     section.addEventListener("mouseleave", createHoverReveal);
   });
 }
 
 function createHoverReveal(event) {
-  console.log(event.type);
+  const { imageBlock, mask } = event.target;
+  const tl = gsap.timeline({
+    defaults: {
+      duration: 0.7,
+      ease: "Power4.out",
+    },
+  });
+
+  if (event.type === "mouseenter") {
+    tl.to([mask, imageBlock], { yPercent: 0 });
+  } else if (event.type === "mouseleave") {
+    tl.to(mask, { yPercent: 100 }).to(imageBlock, { yPercent: -101 }, 0);
+  }
+  return tl;
 }
 // Finish  Reveal Gallery
 
