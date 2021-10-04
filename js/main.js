@@ -275,44 +275,61 @@ function getPortfolioOffset(clientY) {
 }
 // Finish Portfolio
 
-
 // Start Parallax Images
 
-function  initImageParallax() {
-
+function initImageParallax() {
   //select all section .with-parallax
-  gsap.utils.toArray(".with-parallax").forEach(
-    section =>{
-      //get the image
-      const image = section.querySelector("img")
+  gsap.utils.toArray(".with-parallax").forEach((section) => {
+    //get the image
+    const image = section.querySelector("img");
 
-      //create tween for the image
-      gsap.to(image, {
-        yPercent: 20,
-        ease:"none",
-        scrollTrigger:{
-          trigger:section,
-          start: "top bottom",
-          scrub: true,
-        }
-      })
-    }
-  )
-  
+    //create tween for the image
+    gsap.to(image, {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        scrub: true,
+      },
+    });
+  });
 }
 
 // Finish Parallax Images
 
 // Start Pin Navigation
 
-function  initPinSteps() {
+function initPinSteps() {
   ScrollTrigger.create({
     trigger: ".fixed-nav",
-    start:"top center",
+    start: "top center",
     endTrigger: "#stage4",
     end: "center center",
     pin: true,
-  })
+  });
+
+  const getVh = () => {
+    const vh = Math.max(
+      document.documentElement.clientHeight || 0,
+      window.innerHeight || 0
+    );
+    return vh;
+  };
+
+  // Highlight active item 
+  gsap.utils.toArray(".stage").forEach((stage, index) => {
+    const navLinks = gsap.utils.toArray(".fixed-nav li");
+    ScrollTrigger.create({
+      trigger: stage,
+      start: "top center",
+      end: () => `+=${stage.clientHeight + getVh() / 10}`,
+      toggleClass: {
+        targets: navLinks[index],
+        className: "is-active",
+      },
+    });
+  });
 }
 
 // Finish Pin Navigation
