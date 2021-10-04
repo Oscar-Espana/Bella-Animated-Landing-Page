@@ -8,6 +8,7 @@ function init() {
   initNavigation();
   initHeaderTilt();
   initPortfolioHover();
+  initImageParallax();
 }
 
 // Start Navigation Header
@@ -272,3 +273,32 @@ function getPortfolioOffset(clientY) {
   );
 }
 // Finish Portfolio
+
+
+// Start Parallax Images
+
+function  initImageParallax() {
+
+  //select all section .with-parallax
+  gsap.utils.toArray(".with-parallax").forEach(
+    section =>{
+      //get the image
+      const image = section.querySelector("img")
+
+      //create tween for the image
+      gsap.to(image, {
+        yPercent: 20,
+        ease:"none",
+        scrollTrigger:{
+          trigger:section,
+          start: "top bottom",
+          scrub: true,
+          markers: true
+        }
+      })
+    }
+  )
+  
+}
+
+// Finish Parallax Images
