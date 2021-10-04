@@ -5,25 +5,25 @@
   --burger-width: 40px;
   --font-headings: Georgia, serif;
 
-  --bcg-green: #ACB7AE;
+  --bcg-green: #acb7ae;
   --bcg-lightgreen: #a6b3b3;
   --bcg-lightbrown: #b0a7a4;
   --bcg-lightblue: #a3abb1;
 
-  --bcg-loaderblue: #758A94;
-  --bcg-loaderbluedark: #566C76;
+  --bcg-loaderblue: #758a94;
+  --bcg-loaderbluedark: #566c76;
 
   --loader-width: 27.36vw;
   --loader-height: 50vh;
 
   --v-spacing: 10vh;
-  --h-gutter: 6.6vw;  
+  --h-gutter: 6.6vw;
 
   --easing: cubic-bezier(0.5, 0.7, 0.4, 1);
 }
 
 body {
-  font: 16px/1.7 'Source Sans Pro', Helvetica, Helvetica Neue, Arial, sans-serif;
+  font: 16px/1.7 "Source Sans Pro", Helvetica, Helvetica Neue, Arial, sans-serif;
   color: var(--text-dark-color);
 }
 
@@ -41,7 +41,7 @@ body {
 .logo__img {
   width: 55px;
   height: 55px;
-  background: url('../img/img_logo.svg') no-repeat center;
+  background: url("../img/img_logo.svg") no-repeat center;
   background-size: 55px 55px;
   display: block;
   position: absolute;
@@ -119,7 +119,7 @@ body {
 }
 .main-nav a:after {
   display: block;
-  content: '';
+  content: "";
   height: 2px;
   background-color: var(--text-color);
   position: absolute;
@@ -138,7 +138,7 @@ body {
 
 /* Reveal logo and move buger when the user scrolls */
 .has-scrolled .burger {
-  transform: translateX(100%)
+  transform: translateX(100%);
 }
 .has-scrolled .logo__img {
   opacity: 1;
@@ -146,7 +146,6 @@ body {
 .has-scrolled .logo__text {
   opacity: 0;
 }
-
 
 /* =Header */
 header {
@@ -199,23 +198,27 @@ header h1 span {
   top: auto;
   bottom: -3.8vw;
   left: 58%;
-  background: url('../img/img_logo.svg') no-repeat center;
+  background: url("../img/img_logo.svg") no-repeat center;
   background-size: 50% 50%;
   pointer-events: none; /* important to be able to hover over links under the image */
 }
 .cta__circle--logo {
   width: 7.7vw;
   height: 7.7vw;
-  background: url('../img/img_scroll-badge.svg') no-repeat center;
+  background: url("../img/img_scroll-badge.svg") no-repeat center;
   background-size: 100% 100%;
-  animation: rotation 45s linear infinite; 
+  animation: rotation 45s linear infinite;
   position: absolute;
   top: 0;
   left: 0;
 }
 @keyframes rotation {
-  0%   {  transform:  rotate(0deg); }
-  100% {  transform:  rotate(360deg) ; }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* =Header Gallery (random image proportion) 
@@ -261,7 +264,7 @@ header h1 span {
   position: absolute;
   object-fit: cover;
   object-position: 50% 50%;
-  opacity: 0.8
+  opacity: 0.8;
 }
 .hg__left .hg__image:nth-child(1) {
   top: 17vh;
@@ -299,7 +302,7 @@ header h1 span {
 /* =Reveal Gallery */
 .reveal-gallery {
   width: 100%;
-  height: 100vh;
+  flex-direction: column;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -315,6 +318,7 @@ header h1 span {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  min-height: 50vh;
 }
 .rg__text--heading h3 {
   font-size: 3.6vw;
@@ -331,14 +335,13 @@ header h1 span {
   font-weight: normal;
 }
 .rg__text {
-  max-width: 17vw;
   z-index: 1;
   position: relative;
 }
 .rg__text--copy,
 .stage__text p {
   font-weight: 300;
-  letter-spacing: .03vw;
+  letter-spacing: 0.03vw;
 }
 
 .rg__text--copy p {
@@ -352,12 +355,12 @@ header h1 span {
   position: absolute;
   top: 50%;
   left: 0;
-  content: '';
+  content: "";
   width: 1px;
   height: 20vh;
   transform: translateY(-50%);
   background-color: var(--text-color);
-  opacity: 0.4
+  opacity: 0.4;
 }
 .rg__image {
   width: 100%;
@@ -381,7 +384,8 @@ header h1 span {
 }
 
 /* =Loader */
-.loader, .loader__content {
+.loader,
+.loader__content {
   min-height: 100vh;
   position: fixed;
   flex-direction: column;
@@ -451,7 +455,6 @@ header h1 span {
   position: absolute;
 }
 
-
 /* =Main */
 main {
   z-index: 1;
@@ -503,7 +506,7 @@ section {
   z-index: 1;
 }
 .portfolio__image--l,
-.portfolio__image--s  {
+.portfolio__image--s {
   pointer-events: none; /* important to be able to hover over links under the image */
   position: absolute;
   width: 28vw;
@@ -543,8 +546,8 @@ section {
 .blog {
   color: var(--text-color);
 }
-.blog  .chapter,
-.contact  .chapter {
+.blog .chapter,
+.contact .chapter {
   top: inherit;
   left: inherit;
   position: relative;
@@ -569,7 +572,9 @@ section {
   position: absolute;
   left: calc(50vw + var(--h-gutter));
   right: calc(var(--h-gutter) * 4);
-  top: calc(50% + (var(--v-spacing) / 2)); /* 50% not 50vh becasue blog is not 100vh */
+  top: calc(
+    50% + (var(--v-spacing) / 2)
+  ); /* 50% not 50vh becasue blog is not 100vh */
   transform: translateY(-50%);
 }
 .blog__text h3 {
@@ -594,20 +599,24 @@ section {
 
 /* =How we work */
 .how-we-work .chapter {
-  top: calc(var(--v-spacing)*2);
+  top: calc(var(--v-spacing) * 2);
 }
 .fixed-nav {
   position: absolute;
-  top: calc(var(--v-spacing)*3);
+  top: calc(var(--v-spacing) * 3);
   left: var(--h-gutter);
 }
-.fixed-nav ul {list-style: none; margin: 0; padding: 0}
+.fixed-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 .fixed-nav li {
   overflow: hidden;
 }
 .fixed-nav a {
   color: var(--text-color);
-  text-decoration: none; 
+  text-decoration: none;
   font-family: var(--font-headings);
   position: relative;
   padding-left: 1.8vw;
@@ -618,7 +627,7 @@ section {
 }
 
 .fixed-nav li a::before {
-  content: '';
+  content: "";
   display: block;
   height: 2px;
   width: 1.3vw;
@@ -678,14 +687,25 @@ section {
  ========================================================================== */
 
 @media only screen and (min-width: 480px) {
-
 }
 
 @media only screen and (min-width: 768px) {
-
-
+  /* =Reveal Gallery */
+  .reveal-gallery {
+    flex-direction: row;
+    height: 100vh;
+  }
+  .rg__column {
+    min-height: auto;
+  }
+  .rg__text--copy {
+    position: absolute;
+    overflow: hidden;
+  }
+  .rg__text {
+    max-width: 17vw;
+  }
 }
 
 @media only screen and (min-width: 1140px) {
-
 }

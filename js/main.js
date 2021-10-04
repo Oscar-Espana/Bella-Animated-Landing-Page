@@ -146,12 +146,31 @@ function createHoverReveal(event) {
 }
 // Finish  Reveal Gallery
 
-function init() {
-  initNavigation();
-  initHeaderTilt();
-  initHoverReveal();
-}
+// function init() {
+//   initNavigation();
+//   initHeaderTilt();
+//   initHoverReveal();
+// }
 
-window.addEventListener("load", function () {
-  init();
-});
+// window.addEventListener("load", function () {
+//   init();
+// });
+
+//define a breakpoint
+const mq = window.matchMedia("(min-width: 768px)");
+// add change listener to tjis breakpoint
+mq.addEventListener("change", handleWidthChange);
+
+//first page load
+handleWidthChange(mq);
+
+function handleWidthChange(mq) {
+  //check if we are on the right breakpoint
+  if (mq.matches) {
+    //setup hover animation
+    initHoverReveal();
+  } else {
+    //width is less than 768px
+    console.log("we are on mobile");
+  }
+}
