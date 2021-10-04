@@ -1,5 +1,14 @@
 gsap.registerPlugin(ScrollTrigger);
 
+window.addEventListener("load", function () {
+  init();
+});
+
+function init() {
+  initNavigation();
+  initHeaderTilt();
+}
+
 // Start Navigation Header
 function initNavigation() {
   const mainNavLink = gsap.utils.toArray(".main-nav a");
@@ -89,17 +98,7 @@ function moveImages(event) {
 }
 // Finish Navigation Header
 
-// function init() {
-//   initNavigation();
-//   initHeaderTilt();
-// }
-
-// window.addEventListener("load", function () {
-//   init();
-// });
-
 // Start Reveal Gallery
-
 const sections = document.querySelectorAll(".rg__column");
 
 //define a breakpoint
@@ -167,9 +166,8 @@ function createHoverReveal(event) {
 }
 
 function resetProps(elements) {
-
   //stop all tweents
-  gsap.killTweensOf("*")
+  gsap.killTweensOf("*");
 
   if (elements.length) {
     elements.forEach((element) => {
