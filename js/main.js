@@ -1,5 +1,4 @@
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 window.addEventListener("load", function () {
   init();
@@ -292,7 +291,7 @@ function initImageParallax() {
       scrollTrigger: {
         trigger: section,
         start: "top bottom",
-        scrub: true,
+        scrub: 1,
       },
     });
   });
@@ -309,6 +308,7 @@ function initPinSteps() {
     endTrigger: "#stage4",
     end: "center center",
     pin: true,
+    pinReparent: true
   });
 
   const getVh = () => {
@@ -353,5 +353,30 @@ function initScrollTo() {
     });
   });
 }
+
+// Finish ScrollTo Section
+
+// Start ScrollTo Section
+
+let container = document.querySelector("#scroll-container");
+let height;
+function setHeight() {
+  height = container.clientHeight;
+  document.body.style.height = `${height}px`;
+}
+
+ScrollTrigger.addEventListener("refreshInit", setHeight);
+
+gsap.to(container, {
+  y: ()=> -(height - document.documentElement.clientHeight),
+  ease: "none",
+  scrollTrigger: {
+    trigger: document.body,
+    start: "top top",
+    end: "bottom bottom",
+    scrub: 1,
+    invalidateOnRefresh: true,
+  }
+})
 
 // Finish ScrollTo Section
