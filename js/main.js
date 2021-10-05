@@ -317,7 +317,11 @@ function initPinSteps() {
     return vh;
   };
 
-  // Highlight active item 
+  const updateBodyColor = (color) => {
+    document.documentElement.style.setProperty("--bcg-fill-color", color);
+  };
+
+  // Highlight active item
   gsap.utils.toArray(".stage").forEach((stage, index) => {
     const navLinks = gsap.utils.toArray(".fixed-nav li");
     ScrollTrigger.create({
@@ -328,6 +332,8 @@ function initPinSteps() {
         targets: navLinks[index],
         className: "is-active",
       },
+      onEnter: () => updateBodyColor(stage.dataset.color),
+      onEnterBack: () => updateBodyColor(stage.dataset.color),
     });
   });
 }
