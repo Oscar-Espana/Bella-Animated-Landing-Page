@@ -1,4 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 window.addEventListener("load", function () {
   init();
@@ -10,6 +11,7 @@ function init() {
   initPortfolioHover();
   initImageParallax();
   initPinSteps();
+  initScrollTo();
 }
 
 // Start Navigation Header
@@ -339,3 +341,17 @@ function initPinSteps() {
 }
 
 // Finish Pin Navigation
+
+// Start ScrollTo Section
+function initScrollTo() {
+  //find all links and animate to the right position
+  gsap.utils.toArray(".fixed-nav a").forEach((link) => {
+    const target = link.getAttribute("href");
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      gsap.to(window, { duration: 1.5, scrollTo: target, ease: "Power2.out" });
+    });
+  });
+}
+
+// Finish ScrollTo Section
